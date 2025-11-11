@@ -1,0 +1,19 @@
+body {
+  padding: 130px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#footnav {
+    padding-top: 0.25rem;   
+    padding-bottom: 0rem; 
+    padding-right: 0rem;
+}
+
+
+#headnav .nav-item {
+    margin-left: 1rem;
+}
