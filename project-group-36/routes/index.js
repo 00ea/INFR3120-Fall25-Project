@@ -1,24 +1,49 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET page2. */
+// In-memory book data (temporary for development)
+let books = [
+  { id: 1, title: "Book One", author: "Author A", borrower: null, due: null },
+  { id: 2, title: "Book Two", author: "Author B", borrower: "test@email.com", due: "2025-12-01" }
+];
+
+// Home page: Catalog list
 router.get('/', function(req, res, next) {
-  res.render('page1', { title: 'Page 1'});
+  res.render('page1', { title: 'Library Catalog', books: books });
 });
 
-/* GET page2. */
-router.get('/page2', function(req, res, next) {
-  res.render('page2', { title: 'Page 2'});
+// Add Book form
+router.get('/add', function(req, res) {
+  res.render('page2', { title: 'Add New Book' });
 });
 
-/* GET page3. */
-router.get('/page3', function(req, res, next) {
-  res.render('page3', { title: 'Page 3'});
+// Add Book (handle POST)
+router.post('/add', function(req, res) {
+  const { title, author } = req.body;
+  books.push({ id: books.length + 1, title, author, borrower: null, due: null });
+  res.redirect('/');
 });
 
-/* GET page4. */
-router.get('/page4', function(req, res, next) {
-  res.render('page4', { title: 'Page 4'});
+// Lend Book form
+router.get('/lend/:id', function(req, res) {
+  const book = books.find(b => b.id == req.params.id);
+  res.render('page3', { title: 'Lend Book', book });
+});
+
+// Lend Book (handle POST)
+router.post('/lend/:id', function(req, res) {
+  const book = books.find(b => b.id == req.params.id);
+  book.borrower = req.body.borrower;
+  book.due = req.body.due;
+  res.redirect('/');
+});
+
+// Return Book
+router.post('/return/:id', function(req, res) {
+  const book = books.find(b => b.id == req.params.id);
+  book.borrower = null;
+  book.due = null;
+  res.redirect('/');
 });
 
 module.exports = router;
