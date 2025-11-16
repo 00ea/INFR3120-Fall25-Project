@@ -9,12 +9,17 @@ let books = [
 
 // Home page: Catalog list
 router.get('/', function(req, res, next) {
-  res.render('page1', { title: 'Library Catalog', books: books });
+  res.render('page1', { 
+    title: 'Library Catalog', 
+    books: books 
+  });
 });
 
 // Add Book form
 router.get('/add', function(req, res) {
-  res.render('page2', { title: 'Add New Book' });
+  res.render('page2', { 
+    title: 'Add New Book' 
+  });
 });
 
 // Add Book (handle POST)
@@ -27,7 +32,10 @@ router.post('/add', function(req, res) {
 // Lend Book form
 router.get('/lend/:id', function(req, res) {
   const book = books.find(b => b.id == req.params.id);
-  res.render('page3', { title: 'Lend Book', book });
+  res.render('page3', { 
+    title: 'Lend Book', 
+    book: book 
+  });
 });
 
 // Lend Book (handle POST)
