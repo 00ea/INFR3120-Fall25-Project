@@ -1,46 +1,25 @@
-<%- contentFor('body') %>
-
-<div class="d-flex justify-content-center">
-
-<div class="card bg-secondary p-3" style="max-width: 30rem;">
-<div class="card-body d-flex flex-column align-items-center p-3 ">
-
-<!-- Title -->
-<h1 class="card-title pt-3" style="text-align: center;">Contact Me <i class="fa-solid fa-inbox"></i></h1>
-
-<!-- Name -->
-  <div class="pb-1">
-    <label for="inputName" class="col-form-label">Name <i class="fa-solid fa-id-card"></i></label>
+<div class="container">
+  <!-- This lets us mark a book as borrowed, essential for keeping track -->
+  <div class="text-center mt-4 mb-3">
+    <h2>Lend Book: <%= book.title %></h2>
+    <h5>Author: <%= book.author %></h5>
   </div>
-  <div class="col-auto">
-    <input style="text-align: center;" type="name" id="inputName" class="form-control" aria-describedby="name" placeholder="John Doe">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <!-- The main lending form. All fields are required to help with book tracking. -->
+      <form action="/lend/<%= book.id %>" method="POST" class="card shadow p-4 border-0">
+        <div class="mb-3">
+          <label for="borrower" class="form-label font-weight-bold">
+            Borrower (email)
+          </label>
+          <input type="email" class="form-control" id="borrower" name="borrower" required placeholder="Borrower's email">
+        </div>
+        <div class="mb-3">
+          <label for="due" class="form-label font-weight-bold">Expected Return Date</label>
+          <input type="date" class="form-control" id="due" name="due" required>
+        </div>
+        <button type="submit" class="btn btn-warning btn-block">Lend Book</button>
+      </form>
+    </div>
   </div>
-
-<!-- Email -->
-  <div class="pt-3 pb-1">
-    <label for="inputEmail" class="col-form-label">Email <i class="fa-solid fa-envelope"></i></label>
-  </div>
-  <div class="col-auto">
-    <input style="text-align: center;" type="email" id="inputEmail" class="form-control" aria-describedby="email" placeholder="johndoe@gmail.com">
-  </div>
-
-<!-- Phone Number -->
-  <div class="pt-3 pb-1">
-    <label for="inputNum" class="col-form-label">Phone Number <i class="fa-solid fa-phone"></i></label>
-  </div>
-  <div class="col-auto">
-    <input style="text-align: center;" type="num" id="inputNum" class="form-control" aria-describedby="number" placeholder="(123)-456-7890">
-  </div>
-
-<!-- Message -->
-<div class="p-3">
-  <label for="messageField" class="form-label">Message <i class="fa-solid fa-comment"></i></label>
-</div>
-  <textarea class="form-control" id="messageField" rows="3" cols="50" placeholder="Enter Message"></textarea>
-
-<div class="pt-4">
-<a href="/success" class="btn btn-outline-dark btn-lg">Submit</a>
-</div>
-</div>
-</div>
 </div>
