@@ -1,46 +1,73 @@
 <%- contentFor('body') %>
 
 <div class="d-flex justify-content-center">
+  <div class="card bg-secondary p-4" style="max-width: 52rem; width: 100%;">
+    <div class="card-body d-flex flex-column align-items-center p-4">
 
-<div class="card bg-secondary p-3" style="max-width: 30rem;">
-<div class="card-body d-flex flex-column align-items-center p-3 ">
+      <!-- Title -->
+      <h1 class="card-title py-3" style="text-align: center; font-size: 2.25rem;">
+        Add New Book <i class="fa-solid fa-book"></i>
+      </h1>
 
-<!-- Title -->
-<h1 class="card-title pt-3" style="text-align: center;">Contact Me <i class="fa-solid fa-inbox"></i></h1>
 
-<!-- Name -->
-  <div class="pb-1">
-    <label for="inputName" class="col-form-label">Name <i class="fa-solid fa-id-card"></i></label>
+      <form class="row w-100 gx-5 gy-3" action="/add" method="POST">
+        <!-- Book Title -->
+        <div class="col-md-6 pt-3">
+          <label for="bookTitle" class="form-label">
+            Book Title <i class="fa-solid fa-heading"></i>
+          </label>
+          <input type="text" id="bookTitle" name="title" class="form-control" placeholder="e.g. The Catcher in the Rye" required>
+        </div>
+        <!-- Author -->
+        <div class="col-md-6 pt-3">
+          <label for="bookAuthor" class="form-label">
+            Author <i class="fa-solid fa-user-pen"></i>
+          </label>
+          <input type="text" id="bookAuthor" name="author" class="form-control" placeholder="e.g. J.D. Salinger" required>
+        </div>
+        <!-- Genre -->
+        <div class="col-md-6 pt-3">
+          <label for="bookGenre" class="form-label">
+            Genre <i class="fa-solid fa-tags"></i>
+          </label>
+          <input type="text" id="bookGenre" name="genre" class="form-control" placeholder="e.g. Fiction">
+        </div>
+       
+        <!-- Borrower Name -->
+        <div class="col-md-6 pt-3">
+          <label for="borrowerName" class="form-label">
+            Borrower Name<i class="fa-solid fa-user"></i>
+          </label>
+          <input type="text" id="borrowerName" name="borrower" class="form-control" placeholder="e.g. Jane Doe">
+        </div>
+        <!-- Borrower Email -->
+        <div class="col-md-6 pt-3">
+          <label for="borrowerEmail" class="form-label">
+            Borrower Email <i class="fa-solid fa-envelope"></i>
+          </label>
+          <input type="email" id="borrowerEmail" name="borrowerEmail" class="form-control" placeholder="e.g. janedoe@email.com">
+        </div>
+        <!-- Return Date -->
+        <div class="col-md-6 pt-3">
+          <label for="returnDate" class="form-label">
+            Expected Return Date <i class="fa-solid fa-calendar-days"></i>
+          </label>
+          <input type="date" id="returnDate" name="due" class="form-control">
+        </div>
+        <!-- Notes Section -->
+        <div class="col-12 pt-3" style="text-align: center;">
+          <label for="notes" class="form-label">
+            Notes <i class="fa-solid fa-note-sticky"></i>
+          </label>
+          <textarea class="form-control mx-auto" id="notes" name="notes" rows="4" style="max-width: 70%;" placeholder="Additional notes about this book"></textarea>
+        </div>
+        <!-- Submit Button -->
+        <div class="pt-4 col-12" style="text-align: center;">
+          <button type="submit" class="btn btn-outline-dark btn-lg px-5">Save Book</button>
+        </div>
+      </form>
+      <!-- End form here -->
+
+    </div>
   </div>
-  <div class="col-auto">
-    <input style="text-align: center;" type="name" id="inputName" class="form-control" aria-describedby="name" placeholder="John Doe">
-  </div>
-
-<!-- Email -->
-  <div class="pt-3 pb-1">
-    <label for="inputEmail" class="col-form-label">Email <i class="fa-solid fa-envelope"></i></label>
-  </div>
-  <div class="col-auto">
-    <input style="text-align: center;" type="email" id="inputEmail" class="form-control" aria-describedby="email" placeholder="johndoe@gmail.com">
-  </div>
-
-<!-- Phone Number -->
-  <div class="pt-3 pb-1">
-    <label for="inputNum" class="col-form-label">Phone Number <i class="fa-solid fa-phone"></i></label>
-  </div>
-  <div class="col-auto">
-    <input style="text-align: center;" type="num" id="inputNum" class="form-control" aria-describedby="number" placeholder="(123)-456-7890">
-  </div>
-
-<!-- Message -->
-<div class="p-3">
-  <label for="messageField" class="form-label">Message <i class="fa-solid fa-comment"></i></label>
-</div>
-  <textarea class="form-control" id="messageField" rows="3" cols="50" placeholder="Enter Message"></textarea>
-
-<div class="pt-4">
-<a href="/success" class="btn btn-outline-dark btn-lg">Submit</a>
-</div>
-</div>
-</div>
 </div>

@@ -22,11 +22,18 @@ router.get('/add', function(req, res) {
   });
 });
 
+// Book Added
+router.get('/bookadded', function(req, res) {
+  res.render('bookadded', { 
+    title: 'Book Added!' 
+  });
+});
+
 // Add Book (handle POST)
 router.post('/add', function(req, res) {
   const { title, author } = req.body;
   books.push({ id: books.length + 1, title, author, borrower: null, due: null });
-  res.redirect('/');
+  res.redirect('/bookadded');
 });
 
 // Lend Book form
