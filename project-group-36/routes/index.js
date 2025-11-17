@@ -61,4 +61,18 @@ router.post('/return/:id', function(req, res) {
   res.redirect('/');
 });
 
+// Remove Book
+router.get('/remove', function(req, res) {
+  res.render('page4', { 
+    title: 'Remove Book', 
+    books: books 
+  });
+});
+
+router.post('/delete/:id', function(req, res) {
+  const bookId = Number(req.params.id);
+  books = books.filter(book => book.id !== bookId);
+  res.redirect('/remove');
+});
+
 module.exports = router;
