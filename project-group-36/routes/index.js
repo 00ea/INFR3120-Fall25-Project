@@ -1,14 +1,10 @@
+const Book = require('../models/Book');
 var express = require('express');
 var router = express.Router();
 
-// In-memory book data (temporary for development)
-let books = [
-  { id: 1, title: "Book One", author: "Author A", borrower: null, due: null },
-  { id: 2, title: "Book Two", author: "Author B", borrower: "test@email.com", due: "2025-12-01" }
-];
-
 // Home page: Catalog list
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
+  const books = await Book.find();
   res.render('page1', { 
     title: 'Library Catalog', 
     books: books 
@@ -17,10 +13,14 @@ router.get('/', function(req, res, next) {
 
 // Add Book form
 router.get('/add', function(req, res) {
-  res.render('page2', { 
-    title: 'Add New Book' 
-  });
+  res.render('page2', { title: 'Add New Book' });
 });
+
+router.post('/add', async function(req, res) {
+  await Book.create(req.body);
+  res.redirect('/bookadded');
+});
+
 
 // Book Added
 router.get('/bookadded', function(req, res) {
@@ -29,50 +29,41 @@ router.get('/bookadded', function(req, res) {
   });
 });
 
-// Add Book (handle POST)
-router.post('/add', function(req, res) {
-  const { title, author } = req.body;
-  books.push({ id: books.length + 1, title, author, borrower: null, due: null });
-  res.redirect('/bookadded');
-});
-
 // Lend Book form
-router.get('/lend/:id', function(req, res) {
-  const book = books.find(b => b.id == req.params.id);
-  res.render('page3', { 
-    title: 'Lend Book', 
-    book: book 
-  });
+router.get('/lend/:id', async function(req, res) {
+  const book = await Book.findById(req.params.id);
+  res.render('page3', { title: 'Lend Book', book: book });
 });
 
-// Lend Book (handle POST)
-router.post('/lend/:id', function(req, res) {
-  const book = books.find(b => b.id == req.params.id);
-  book.borrower = req.body.borrower;
-  book.due = req.body.due;
+router.post('/lend/:id', async function(req, res) {
+  await Book.findByIdAndUpdate(req.params.id, { 
+    borrower: req.body.borrower, 
+    due: req.body.due 
+  });
   res.redirect('/');
 });
+
 
 // Return Book
-router.post('/return/:id', function(req, res) {
-  const book = books.find(b => b.id == req.params.id);
-  book.borrower = null;
-  book.due = null;
+router.post('/return/:id', async function(req, res) {
+  await Book.findByIdAndUpdate(req.params.id, { 
+    borrower: null, 
+    due: null 
+  });
   res.redirect('/');
 });
 
+
 // Remove Book
-router.get('/remove', function(req, res) {
-  res.render('page4', { 
-    title: 'Remove Book', 
-    books: books 
-  });
+router.get('/remove', async function(req, res) {
+  const books = await Book.find();
+  res.render('page4', { title: 'Remove Book', books: books });
 });
 
-router.post('/delete/:id', function(req, res) {
-  const bookId = Number(req.params.id);
-  books = books.filter(book => book.id !== bookId);
+router.post('/delete/:id', async function(req, res) {
+  await Book.findByIdAndDelete(req.params.id);
   res.redirect('/remove');
 });
+
 
 module.exports = router;

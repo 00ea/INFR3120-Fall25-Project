@@ -6,8 +6,15 @@ var logger = require('morgan');
 const expressLayouts = require('express-ejs-layouts');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
 var app = express();
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://ascendedao:V4csS3AFTogkYzZw@cluster0.tskcddw.mongodb.net/?appName=Cluster0', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
