@@ -74,7 +74,7 @@ router.post('/register', function(req, res) {
   const newUser = {
     id: users.length + 1,
     email,
-    password // In production, hash this!
+    password
   };
   
   users.push(newUser);
