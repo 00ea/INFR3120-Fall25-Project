@@ -1,3 +1,4 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -8,8 +9,15 @@ const expressLayouts = require('express-ejs-layouts');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
+var mongoose = require('mongoose');
 
 var app = express();
+
+var mongoURI = process.env.MONGODB_URI;
+
+mongoose.connect(mongoURI)
+  .then(() => console.log('✓ Successfully connected to MongoDB'))
+  .catch(err => console.log('✗ MongoDB connection error:', err));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -55,7 +63,11 @@ app.use(function(err, req, res, next) {
     res.render('error', { title: "Error" });
 });
 
+// testing
 
+console.log('Environment check:');
+console.log('MONGODB_URI exists:', !!process.env.MONGODB_URI);
+console.log('MONGODB_URI value:', process.env.MONGODB_URI);
 
 // Always export the app object
 module.exports = app;
