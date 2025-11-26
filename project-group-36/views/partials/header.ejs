@@ -5,16 +5,36 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav me-auto">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a href="/" class="btn btn-outline-dark btn-lg">Catalog <i class="fa-solid fa-book"></i></a>
       </li>
-      <li class="nav-item">
-        <a href="/add" class="btn btn-outline-dark btn-lg">Add Book <i class="fa-solid fa-plus"></i></a>
-      </li>
-      <li class="nav-item">
-        <a href="/remove" class="btn btn-outline-dark btn-lg">Remove book <i class="fa-solid fa-minus"></i></a>
-      </li>
+      <% if (typeof isLoggedIn !== 'undefined' && isLoggedIn) { %>
+        <li class="nav-item">
+          <a href="/add" class="btn btn-outline-dark btn-lg">Add Book <i class="fa-solid fa-plus"></i></a>
+        </li>
+        <li class="nav-item">
+          <a href="/remove" class="btn btn-outline-dark btn-lg">Remove book <i class="fa-solid fa-minus"></i></a>
+        </li>
+      <% } %>
+    </ul>
+    
+    <ul class="navbar-nav ml-auto">
+      <% if (typeof isLoggedIn !== 'undefined' && isLoggedIn) { %>
+        <li class="nav-item">
+          <span class="navbar-text mr-3">Welcome, <%= user %></span>
+        </li>
+        <li class="nav-item">
+          <a href="/auth/logout" class="btn btn-outline-danger btn-lg">Logout</a>
+        </li>
+      <% } else { %>
+        <li class="nav-item">
+          <a href="/auth/login" class="btn btn-outline-primary btn-lg">Login</a>
+        </li>
+        <li class="nav-item ml-2">
+          <a href="/auth/register" class="btn btn-outline-success btn-lg">Register</a>
+        </li>
+      <% } %>
     </ul>
   </div>
 </nav>
