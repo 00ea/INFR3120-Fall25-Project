@@ -63,11 +63,5 @@ app.use(function(err, req, res, next) {
     res.render('error', { title: "Error" });
 });
 
-// testing
-
-console.log('Environment check:');
-console.log('MONGODB_URI exists:', !!process.env.MONGODB_URI);
-console.log('MONGODB_URI value:', process.env.MONGODB_URI);
-
 // Always export the app object
 module.exports = app;
