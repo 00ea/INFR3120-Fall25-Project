@@ -7,6 +7,15 @@ let books = [
   { id: 2, title: "Book Two", author: "Author B", borrower: "test@email.com", due: "2025-12-01" }
 ];
 
+// Middleware to check if user is logged in
+function isAuthenticated(req, res, next) {
+  if (req.session && req.session.userId) {
+    next();
+  } else {
+    res.redirect('/auth/login');
+  }
+}
+
 // Home page: Catalog list
 router.get('/', function(req, res, next) {
   res.render('page1', { 
@@ -15,8 +24,8 @@ router.get('/', function(req, res, next) {
   });
 });
 
-// Add Book form
-router.get('/add', function(req, res) {
+// Add Book form - Protected
+router.get('/add', isAuthenticated, function(req, res) {
   res.render('page2', { 
     title: 'Add New Book' 
   });
@@ -29,15 +38,15 @@ router.get('/bookadded', function(req, res) {
   });
 });
 
-// Add Book (handle POST)
-router.post('/add', function(req, res) {
+// Add Book (handle POST) - Protected
+router.post('/add', isAuthenticated, function(req, res) {
   const { title, author } = req.body;
   books.push({ id: books.length + 1, title, author, borrower: null, due: null });
   res.redirect('/bookadded');
 });
 
-// Lend Book form
-router.get('/lend/:id', function(req, res) {
+// Lend Book form - Protected
+router.get('/lend/:id', isAuthenticated, function(req, res) {
   const book = books.find(b => b.id == req.params.id);
   res.render('page3', { 
     title: 'Lend Book', 
@@ -45,31 +54,31 @@ router.get('/lend/:id', function(req, res) {
   });
 });
 
-// Lend Book (handle POST)
-router.post('/lend/:id', function(req, res) {
+// Lend Book (handle POST) - Protected
+router.post('/lend/:id', isAuthenticated, function(req, res) {
   const book = books.find(b => b.id == req.params.id);
   book.borrower = req.body.borrower;
   book.due = req.body.due;
   res.redirect('/');
 });
 
-// Return Book
-router.post('/return/:id', function(req, res) {
+// Return Book - Protected
+router.post('/return/:id', isAuthenticated, function(req, res) {
   const book = books.find(b => b.id == req.params.id);
   book.borrower = null;
   book.due = null;
   res.redirect('/');
 });
 
-// Remove Book
-router.get('/remove', function(req, res) {
+// Remove Book - Protected
+router.get('/remove', isAuthenticated, function(req, res) {
   res.render('page4', { 
     title: 'Remove Book', 
     books: books 
   });
 });
 
-router.post('/delete/:id', function(req, res) {
+router.post('/delete/:id', isAuthenticated, function(req, res) {
   const bookId = Number(req.params.id);
   books = books.filter(book => book.id !== bookId);
   res.redirect('/remove');
