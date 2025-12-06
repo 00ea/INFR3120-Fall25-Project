@@ -134,4 +134,73 @@ router.get('/logout', function(req, res) {
   });
 });
 
+// show change password page
+router.get('/change-password', isAuthenticated, async function(req, res) {
+  res.render('change-password', { 
+    title: 'Change Password',
+    error: null,
+    success: null
+  });
+});
+
+// handle password change
+router.post('/change-password', isAuthenticated, async function(req, res) {
+  try {
+    const { currentPassword, newPassword, confirmPassword } = req.body;
+
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      return res.render('change-password', { 
+        title: 'Change Password',
+        error: 'All fields required',
+        success: null
+      });
+    }
+
+    if (newPassword !== confirmPassword) {
+      return res.render('change-password', { 
+        title: 'Change Password',
+        error: 'New passwords do not match',
+        success: null
+      });
+    }
+
+    const user = await User.findById(req.session.userId);
+    const isMatch = await user.comparePassword(currentPassword);
+
+    if (!isMatch) {
+      return res.render('change-password', { 
+        title: 'Change Password',
+        error: 'Current password is incorrect',
+        success: null
+      });
+    }
+
+    user.password = newPassword;
+    await user.save();
+
+    res.render('change-password', { 
+      title: 'Change Password',
+      error: null,
+      success: 'Password changed successfully!'
+    });
+  } catch (err) {
+    console.error(err);
+    res.render('change-password', { 
+      title: 'Change Password',
+      error: 'An error occurred',
+      success: null
+    });
+  }
+});
+
+// Helper function (add if not already there)
+function isAuthenticated(req, res, next) {
+  if (req.session && req.session.userId) {
+    next();
+  } else {
+    res.redirect('/auth/login');
+  }
+}
+
+
 module.exports = router;
