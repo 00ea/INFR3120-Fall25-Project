@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-// In-memory user storage (temporary for development)
-// In production, use a database and hash passwords
+// temp user storage - would be database in production
+// note: passwords should be hashed in production!
 let users = [
   { id: 1, email: 'test@email.com', password: 'password123' }
 ];
 
-// Login page
+// show login page
 router.get('/login', function(req, res) {
   res.render('login', { 
     title: 'Login',
@@ -15,19 +15,20 @@ router.get('/login', function(req, res) {
   });
 });
 
-// Handle login
+// handle login form submission
 router.post('/login', function(req, res) {
   const { email, password } = req.body;
   
-  // Find user
+  // find user with matching email and password
   const user = users.find(u => u.email === email && u.password === password);
   
   if (user) {
-    // Set session
+    // save user to session
     req.session.userId = user.id;
     req.session.userEmail = user.email;
     res.redirect('/');
   } else {
+    // show error if login fails
     res.render('login', {
       title: 'Login',
       error: 'Invalid email or password'
@@ -35,7 +36,7 @@ router.post('/login', function(req, res) {
   }
 });
 
-// Register page
+// show registration page
 router.get('/register', function(req, res) {
   res.render('register', {
     title: 'Register',
@@ -43,11 +44,11 @@ router.get('/register', function(req, res) {
   });
 });
 
-// Handle registration
+// handle registration form submission
 router.post('/register', function(req, res) {
   const { email, password, confirmPassword } = req.body;
   
-  // Validation
+  // check all fields are filled
   if (!email || !password || !confirmPassword) {
     return res.render('register', {
       title: 'Register',
@@ -55,6 +56,7 @@ router.post('/register', function(req, res) {
     });
   }
   
+  // check passwords match
   if (password !== confirmPassword) {
     return res.render('register', {
       title: 'Register',
@@ -62,7 +64,7 @@ router.post('/register', function(req, res) {
     });
   }
   
-  // Check if user exists
+  // check email is not already registered
   if (users.find(u => u.email === email)) {
     return res.render('register', {
       title: 'Register',
@@ -70,23 +72,23 @@ router.post('/register', function(req, res) {
     });
   }
   
-  // Create new user
+  // create new user
   const newUser = {
     id: users.length + 1,
     email,
-    password // In production, hash this!
+    password // should be hashed in production!
   };
   
   users.push(newUser);
   
-  // Auto-login after registration
+  // auto login after registration
   req.session.userId = newUser.id;
   req.session.userEmail = newUser.email;
   
   res.redirect('/');
 });
 
-// Logout
+// logout and destroy session
 router.get('/logout', function(req, res) {
   req.session.destroy(function(err) {
     if (err) {

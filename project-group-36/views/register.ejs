@@ -1,21 +1,26 @@
 <div class="container">
+  <!-- registration form card -->
   <div class="row justify-content-center my-5">
     <div class="col-md-5">
       <div class="card">
         <div class="card-body p-5">
+          <!-- header -->
           <div class="text-center mb-4">
             <i class="fa-solid fa-user-plus" style="font-size: 2.5rem; color: var(--accent-color);"></i>
             <h2 class="card-title mt-3">Create Account</h2>
             <p class="text-muted">Join the Library Link community</p>
           </div>
           
+          <!-- show error if registration failed -->
           <% if (error) { %>
             <div class="alert alert-danger" role="alert">
               <i class="fa-solid fa-exclamation-circle"></i> <%= error %>
             </div>
           <% } %>
           
+          <!-- registration form -->
           <form method="POST" action="/auth/register">
+            <!-- email input -->
             <div class="form-group">
               <label for="email">
                 <i class="fa-solid fa-envelope"></i> Email Address
@@ -23,6 +28,7 @@
               <input type="email" class="form-control" id="email" name="email" placeholder="your@email.com" required>
             </div>
             
+            <!-- password input -->
             <div class="form-group">
               <label for="password">
                 <i class="fa-solid fa-lock"></i> Password

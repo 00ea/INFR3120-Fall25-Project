@@ -1,10 +1,12 @@
 <div class="container">
+  <!-- hero section with title and logo -->
   <div class="hero-section">
     <h1>📚 Library Link</h1>
     <h5>Browse your collection, lend books, and organize your reading group!</h5>
     <img src="/images/logo.png" alt="Group 36 Logo" class="rounded-circle">
   </div>
 
+  <!-- book catalog section -->
   <div class="row mb-4">
     <div class="col-12">
       <div class="card">
@@ -13,12 +15,14 @@
             <i class="fa-solid fa-list"></i> Book Catalog
           </h3>
           
+          <!-- show message if no books -->
           <% if (books.length === 0) { %>
             <p class="text-muted text-center py-4">
               <i class="fa-solid fa-inbox" style="font-size: 2rem; color: var(--border-color); margin-bottom: 1rem;"></i>
               <br>No books yet. <a href="/add">Add your first book</a>!
             </p>
           <% } else { %>
+            <!-- display books in table -->
             <div class="table-responsive">
               <table class="table table-hover">
                 <thead class="thead-dark">
@@ -30,11 +34,13 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <!-- loop through each book -->
                   <% books.forEach(function(book) { %>
                     <tr>
                       <td><strong><%= book.title %></strong></td>
                       <td><%= book.author %></td>
                       <td>
+                        <!-- show if book is borrowed or available -->
                         <% if (book.borrower) { %>
                           <span class="badge badge-warning">
                             <i class="fa-solid fa-hand-holding-heart"></i>
@@ -49,6 +55,7 @@
                           </span>
                         <% } %>
                       </td>
+                      <!-- lend or return button -->
                       <td>
                         <% if (!book.borrower) { %>
                           <a href="/lend/<%= book.id %>" class="btn btn-sm btn-success" title="Lend this book">
@@ -73,6 +80,7 @@
     </div>
   </div>
 
+  <!-- only show add/remove buttons if logged in -->
   <% if (typeof isLoggedIn !== 'undefined' && isLoggedIn) { %>
     <div class="row">
       <div class="col-md-6 offset-md-3">

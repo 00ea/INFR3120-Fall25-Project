@@ -1,3 +1,4 @@
+/* color scheme for entire site */
 :root {
   --primary-color: #1e3a8a;
   --secondary-color: #3b82f6;
@@ -10,6 +11,7 @@
   --border-color: #e5e7eb;
 }
 
+/* reset default spacing */
 * {
   margin: 0;
   padding: 0;
@@ -20,6 +22,7 @@ html, body {
   height: 100%;
 }
 
+/* main page background with book image */
 body {
   font-family: 'Segoe UI', Trebuchet MS, sans-serif;
   font-size: 15px;
@@ -40,6 +43,7 @@ main {
   padding: 2rem 0;
 }
 
+/* links styling */
 a {
   color: var(--secondary-color);
   text-decoration: none;
@@ -51,7 +55,7 @@ a:hover {
   text-decoration: none;
 }
 
-/* Header Navigation */
+/* top navigation bar */
 #headnav {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -100,13 +104,14 @@ a:hover {
   color: white;
 }
 
+/* user name text in navbar */
 #headnav .navbar-text {
   color: white;
   font-weight: 500;
   margin-right: 1rem;
 }
 
-/* Footer Navigation */
+/* bottom navigation footer */
 #footnav {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
@@ -117,6 +122,7 @@ a:hover {
   z-index: 1030;
 }
 
+/* social media icons in footer */
 #footnav .nav-link {
   color: rgba(255, 255, 255, 0.8);
   font-size: 1.3rem;
@@ -129,12 +135,13 @@ a:hover {
   transform: translateY(-3px);
 }
 
+/* copyright text at bottom */
 #textinnav {
   color: rgba(255, 255, 255, 0.9);
   font-weight: 500;
 }
 
-/* Cards and Containers */
+/* cards with semi transparent background */
 .card {
   border: none;
   border-radius: 12px;
@@ -152,7 +159,7 @@ a:hover {
   padding: 2rem;
 }
 
-/* Headings */
+/* heading colors */
 h1, h2, h3, h4, h5, h6 {
   color: var(--primary-color);
   font-weight: 600;
@@ -168,13 +175,14 @@ h2 {
   font-size: 2rem;
 }
 
+/* subtitle text */
 h5 {
   color: var(--text-muted);
   font-weight: 400;
   font-size: 1.1rem;
 }
 
-/* Buttons */
+/* all buttons styling */
 .btn {
   border-radius: 8px;
   font-weight: 500;
@@ -183,6 +191,7 @@ h5 {
   border: none;
 }
 
+/* primary button - blue */
 .btn-primary {
   background-color: var(--secondary-color);
   color: white;
@@ -195,6 +204,7 @@ h5 {
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
+/* success button - green */
 .btn-success {
   background-color: var(--accent-color);
   color: white;
@@ -205,6 +215,7 @@ h5 {
   color: white;
 }
 
+/* danger button - red */
 .btn-danger {
   background-color: var(--danger-color);
   color: white;
