@@ -11,6 +11,13 @@ var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
 var mongoose = require('mongoose');
 
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('✓ MongoDB connected'))
+.catch(err => console.error('✗ MongoDB connection error:', err));
+
 var app = express();
 
 // set up views and ejs engine
