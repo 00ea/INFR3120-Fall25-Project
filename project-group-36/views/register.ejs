@@ -1,39 +1,52 @@
 <div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-md-6">
+  <div class="row justify-content-center my-5">
+    <div class="col-md-5">
       <div class="card">
-        <div class="card-body">
-          <h2 class="card-title text-center mb-4">Register</h2>
+        <div class="card-body p-5">
+          <div class="text-center mb-4">
+            <i class="fa-solid fa-user-plus" style="font-size: 2.5rem; color: var(--accent-color);"></i>
+            <h2 class="card-title mt-3">Create Account</h2>
+            <p class="text-muted">Join the Library Link community</p>
+          </div>
           
           <% if (error) { %>
             <div class="alert alert-danger" role="alert">
-              <%= error %>
+              <i class="fa-solid fa-exclamation-circle"></i> <%= error %>
             </div>
           <% } %>
           
           <form method="POST" action="/auth/register">
             <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" class="form-control" id="email" name="email" required>
+              <label for="email">
+                <i class="fa-solid fa-envelope"></i> Email Address
+              </label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="your@email.com" required>
             </div>
             
             <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" name="password" required>
+              <label for="password">
+                <i class="fa-solid fa-lock"></i> Password
+              </label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
             </div>
             
             <div class="form-group">
-              <label for="confirmPassword">Confirm Password</label>
-              <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+              <label for="confirmPassword">
+                <i class="fa-solid fa-lock-check"></i> Confirm Password
+              </label>
+              <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required>
             </div>
             
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-success btn-block btn-lg">
+              <i class="fa-solid fa-user-plus"></i> Register
+            </button>
           </form>
           
-          <hr>
+          <hr class="my-4">
           
-          <p class="text-center">
-            Already have an account? <a href="/auth/login">Login here</a>
+          <p class="text-center mb-0">
+            Already have an account? 
+            <a href="/auth/login" style="font-weight: 600;">Login here</a>
           </p>
         </div>
       </div>
