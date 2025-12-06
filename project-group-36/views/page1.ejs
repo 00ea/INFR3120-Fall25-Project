@@ -1,48 +1,98 @@
 <div class="container">
-  <div class="text-center mt-4 mb-5">
-    <h1 class="card-title mb-0">Library Link</h1>
-    <h5 class="card-text mb-4">Browse your collection, lend books, and organize your reading group!</h5>
-    <img src="/images/logo.png" alt="Group 36 Logo" width="240" height="240" class="rounded-circle mb-3">
+  <!-- hero section with title and logo -->
+  <div class="hero-section">
+    <h1>📚 Library Link</h1>
+    <h5>Browse your collection, lend books, and organize your reading group!</h5>
+    <img src="/images/logo.png" alt="Group 36 Logo" class="rounded-circle">
   </div>
-  <div class="table-responsive">
-    <table class="table table-bordered table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Title</th>
-          <th scope="col">Author</th>
-          <th scope="col">Status</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% books.forEach(function(book) { %>
-          <tr>
-            <td><%= book.title %></td>
-            <td><%= book.author %></td>
-            <td>
-              <% if (book.borrower) { %>
-                Lent to <span class="font-weight-bold"><%= book.borrower %></span>
-                <br>(Due: <%= book.due %>)
-              <% } else { %>
-                Available
-              <% } %>
-            </td>
-            <td>
-              <% if (!book.borrower) { %>
-                <a href="/lend/<%= book.id %>" class="btn btn-sm btn-success">Lend</a>
-              <% } else { %>
-                <form action="/return/<%= book.id %>" method="POST" style="display:inline;">
-                  <button type="submit" class="btn btn-sm btn-warning">Return</button>
-                </form>
-              <% } %>
-            </td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
+
+  <!-- book catalog section -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title mb-3">
+            <i class="fa-solid fa-list"></i> Book Catalog
+          </h3>
+          
+          <!-- show message if no books -->
+          <% if (books.length === 0) { %>
+            <p class="text-muted text-center py-4">
+              <i class="fa-solid fa-inbox" style="font-size: 2rem; color: var(--border-color); margin-bottom: 1rem;"></i>
+              <br>No books yet. <a href="/add">Add your first book</a>!
+            </p>
+          <% } else { %>
+            <!-- display books in table -->
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th><i class="fa-solid fa-book"></i> Title</th>
+                    <th><i class="fa-solid fa-user-edit"></i> Author</th>
+                    <th><i class="fa-solid fa-info-circle"></i> Status</th>
+                    <th style="width: 150px;"><i class="fa-solid fa-cogs"></i> Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- loop through each book -->
+                  <% books.forEach(function(book) { %>
+                    <tr>
+                      <td><strong><%= book.title %></strong></td>
+                      <td><%= book.author %></td>
+                      <td>
+                        <!-- show if book is borrowed or available -->
+                        <% if (book.borrower) { %>
+                          <span class="badge badge-warning">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                            Lent to <%= book.borrower %>
+                          </span>
+                          <br>
+                          <small class="text-muted">Due: <%= book.due %></small>
+                        <% } else { %>
+                          <span class="badge badge-success">
+                            <i class="fa-solid fa-check-circle"></i>
+                            Available
+                          </span>
+                        <% } %>
+                      </td>
+                      <!-- lend or return button -->
+                      <td>
+                        <% if (!book.borrower) { %>
+                          <a href="/lend/<%= book.id %>" class="btn btn-sm btn-success" title="Lend this book">
+                            <i class="fa-solid fa-hand-holding"></i>
+                          </a>
+                        <% } else { %>
+                          <form action="/return/<%= book.id %>" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-warning" title="Return this book">
+                              <i class="fa-solid fa-undo"></i>
+                            </button>
+                          </form>
+                        <% } %>
+                      </td>
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="text-right mb-3">
-    <a href="/remove" class="btn btn-danger">Remove Book</a>
-    <a href="/add" class="btn btn-primary">Add Book</a>
-  </div>
+
+  <!-- only show add/remove buttons if logged in -->
+  <% if (typeof isLoggedIn !== 'undefined' && isLoggedIn) { %>
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="d-flex gap-2 justify-content-center">
+          <a href="/add" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-plus"></i> Add Book
+          </a>
+          <a href="/remove" class="btn btn-danger btn-lg">
+            <i class="fa-solid fa-trash"></i> Remove Book
+          </a>
+        </div>
+      </div>
+    </div>
+  <% } %>
 </div>

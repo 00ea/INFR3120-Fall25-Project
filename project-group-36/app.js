@@ -13,49 +13,47 @@ var mongoose = require('mongoose');
 
 var app = express();
 
-var mongoURI = process.env.MONGODB_URI;
-
-mongoose.connect(mongoURI)
-  .then(() => console.log('✓ Successfully connected to MongoDB'))
-  .catch(err => console.log('✗ MongoDB connection error:', err));
-
-// view engine setup
+// set up views and ejs engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
-
+// middleware for logging, parsing, and cookies
 app.use(expressLayouts);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// session setup for user authentication
 app.use(session({
   secret: 'your-secret-key',
   resave: false,
   saveUninitialized: true,
   cookie: { maxAge: 1000 * 60 * 60 * 24 } // 24 hours
 }));
+
+// static files (images, css, etc)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Middleware to make user info available to all views
+// make user info available to all views
 app.use(function(req, res, next) {
   res.locals.user = req.session ? req.session.userEmail : null;
   res.locals.isLoggedIn = !!(req.session && req.session.userId);
   next();
 });
 
-// Routes for main functionality
+// set up all routes
 app.use('/auth', authRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// catch 404 and forward to error handler
+// handle 404 errors
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// error handler - show errors in development
 app.use(function(err, req, res, next) {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -63,5 +61,5 @@ app.use(function(err, req, res, next) {
     res.render('error', { title: "Error" });
 });
 
-// Always export the app object
+// export app to be used in www
 module.exports = app;

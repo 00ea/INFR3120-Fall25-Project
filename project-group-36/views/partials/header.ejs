@@ -1,40 +1,66 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-secondary" id="headnav">
-  <a class="navbar-brand" href="/"><img src="/images/logo.png" alt="Logo" width="30" height="30" class="rounded-circle"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a href="/" class="btn btn-outline-dark btn-lg">Catalog <i class="fa-solid fa-book"></i></a>
-      </li>
-      <% if (typeof isLoggedIn !== 'undefined' && isLoggedIn) { %>
-        <li class="nav-item">
-          <a href="/add" class="btn btn-outline-dark btn-lg">Add Book <i class="fa-solid fa-plus"></i></a>
-        </li>
-        <li class="nav-item">
-          <a href="/remove" class="btn btn-outline-dark btn-lg">Remove book <i class="fa-solid fa-minus"></i></a>
-        </li>
-      <% } %>
-    </ul>
+<nav class="navbar fixed-top navbar-expand-lg navbar-light" id="headnav">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="/images/logo.png" alt="Library Link Logo" width="40" height="40" class="rounded-circle">
+      <span class="ms-2 d-none d-sm-inline-block" style="color: white; font-weight: 600;">Library Link</span>
+    </a>
     
-    <ul class="navbar-nav align-items-center ml-auto">
-      <% if (typeof isLoggedIn !== 'undefined' && isLoggedIn) { %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color: rgba(255,255,255,0.3);">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <span class="navbar-text">Welcome, <%= user %></span>
+          <a href="/" class="btn btn-outline-dark">
+            <i class="fa-solid fa-book"></i>
+            <span class="ms-2">Catalog</span>
+          </a>
         </li>
-        <li class="nav-item">
-          <a href="/auth/logout" class="btn btn-outline-danger btn-lg">Logout</a>
-        </li>
-      <% } else { %>
-        <li class="nav-item">
-          <a href="/auth/login" class="btn btn-outline-primary btn-lg">Login</a>
-        </li>
-        <li class="nav-item ml-2">
-          <a href="/auth/register" class="btn btn-outline-success btn-lg">Register</a>
-        </li>
-      <% } %>
-    </ul>
+        <% if (typeof isLoggedIn !== 'undefined' && isLoggedIn) { %>
+          <li class="nav-item">
+            <a href="/add" class="btn btn-outline-dark">
+              <i class="fa-solid fa-plus"></i>
+              <span class="ms-2">Add Book</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/remove" class="btn btn-outline-dark">
+              <i class="fa-solid fa-minus"></i>
+              <span class="ms-2">Remove Book</span>
+            </a>
+          </li>
+        <% } %>
+      </ul>
+      
+      <ul class="navbar-nav ml-auto">
+        <% if (typeof isLoggedIn !== 'undefined' && isLoggedIn) { %>
+          <li class="nav-item">
+            <span class="navbar-text">
+              <i class="fa-solid fa-user-circle"></i> <%= user %>
+            </span>
+          </li>
+          <li class="nav-item">
+            <a href="/auth/logout" class="btn btn-outline-danger">
+              <i class="fa-solid fa-sign-out-alt"></i>
+              <span class="ms-2">Logout</span>
+            </a>
+          </li>
+        <% } else { %>
+          <li class="nav-item">
+            <a href="/auth/login" class="btn btn-outline-primary">
+              <i class="fa-solid fa-sign-in-alt"></i>
+              <span class="ms-2">Login</span>
+            </a>
+          </li>
+          <li class="nav-item ms-2">
+            <a href="/auth/register" class="btn btn-outline-success">
+              <i class="fa-solid fa-user-plus"></i>
+              <span class="ms-2">Register</span>
+            </a>
+          </li>
+        <% } %>
+      </ul>
+    </div>
   </div>
 </nav>
