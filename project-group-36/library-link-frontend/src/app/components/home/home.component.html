@@ -1,0 +1,51 @@
+<div class="container mt-5">
+  <h1>📚 Library Link</h1>
+  
+  <div *ngIf="!isLoggedIn" class="alert alert-warning">
+    Please <a href="/auth/login">login</a> to manage your books.
+  </div>
+
+  <div *ngIf="isLoggedIn">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Add New Book</h5>
+        <div class="form-group">
+          <input type="text" class="form-control mb-2" [(ngModel)]="newTitle" placeholder="Book Title" required>
+          <input type="text" class="form-control mb-2" [(ngModel)]="newAuthor" placeholder="Author" required>
+          <button class="btn btn-primary" (click)="addBook()">Add Book</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="books.length === 0" class="alert alert-info">
+      No books yet. Add one above!
+    </div>
+
+    <table class="table table-striped" *ngIf="books.length > 0">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books">
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>
+            <span *ngIf="!book.borrower" class="badge bg-success">Available</span>
+            <span *ngIf="book.borrower" class="badge bg-warning">Lent to {{ book.borrower }}</span>
+          </td>
+          <td>
+            <button *ngIf="book.borrower" class="btn btn-sm btn-warning" (click)="returnBook(book._id)">Return</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteBook(book._id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="btn btn-danger mt-3" (click)="logout()">Logout</button>
+  </div>
+</div>

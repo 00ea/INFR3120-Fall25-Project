@@ -1,11 +1,12 @@
 require('dotenv').config();
+var cors = require('cors');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
-const expressLayouts = require('express-ejs-layouts');
+var expressLayouts = require('express-ejs-layouts');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
@@ -21,6 +22,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 var app = express();
 
 // set up views and ejs engine
+app.use(cors({
+  origin: ['http://localhost:4200', 'http://localhost:3000', 'https://infr3120-fall25-project-1-6s4a.onrender.com/'],
+  credentials: true
+}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
