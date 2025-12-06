@@ -1,48 +1,46 @@
-# **Library Link - Book Management Application**
+Library Link - Book Management Application
 
 A full-stack web application for managing and sharing books within a reading group. Users can browse a catalog, lend books to friends with due dates, return books, and manage their personal book collection with secure user authentication.
 
 ---
 
-## **Group Members**
+Group Members:
 
-**Excel Aibangbee** ~ 100980516 
-<br/>
-**Rayyan Khan** ~ 100978573
-<br/>
-**Zain Iqbal** ~ 100980218
+Excel Aibangbee ~ 100980516 
+Rayyan Khan ~ 100978573
+Zain Iqbal ~ 100980218
 
 ---
 
-## **Technology Stack**
+Technology Stack:
 
-- **Backend**: Node.js, Express.js
-- **Frontend**: EJS (Embedded JavaScript Templating), Bootstrap 4, CSS3
-- **Database**: MongoDB
-- **Authentication**: express-session (Session-based user management)
-- **Additional Libraries**: FontAwesome 6 (Icons), Cookie Parser, Morgan (Logging)
-- **Deployment**: Cloud-based hosting with MongoDB Atlas
-
----
-
-## **Project Features**
-
-✓ User Authentication (Login, Register, Logout)
-✓ Protected Routes (Authentication-required operations)
-✓ Book Catalog Display with status tracking
-✓ Add/Remove Books from collection
-✓ Lend/Return Books with due dates
-✓ Responsive Design (Works on mobile and desktop)
-✓ Modern UI with gradient headers/footers
-✓ Form Validation (Backend & Frontend)
-✓ Session Management (24-hour expiration)
-✓ Error Handling and user-friendly error pages
+- Backend: Node.js, Express.js
+- Frontend: EJS (Embedded JavaScript Templating), Bootstrap 4, CSS3
+- Database: MongoDB
+- Authentication: express-session (Session-based user management)
+- Additional Libraries: FontAwesome 6 (Icons), Cookie Parser, Morgan (Logging)
+- Deployment: Cloud-based hosting with MongoDB Atlas
 
 ---
 
-## **Contribution Summary**
+Project Features
 
-### **Zain Iqbal - Backend Developer**
+User Authentication (Login, Register, Logout)
+Protected Routes (Authentication-required operations)
+Book Catalog Display with status tracking
+Add/Remove Books from collection
+Lend/Return Books with due dates
+Responsive Design (Works on mobile and desktop)
+Modern UI with gradient headers/footers
+Form Validation (Backend & Frontend)
+Session Management (24-hour expiration)
+Error Handling and user-friendly error pages
+
+---
+
+Contribution Summary
+
+Zain Iqbal 
 
 Zain worked on:
 - Creating and adding the logo for the application branding
@@ -51,7 +49,7 @@ Zain worked on:
 - Adding comments throughout the project to improve code readability
 - Applying final touches and fixing errors to improve stability
 
-### **Excel Aibangbee - Full-Stack Developer & DevOps**
+Excel Aibangbee 
 
 Excel worked on:
 - Creating the repository and generating the initial project template
@@ -67,7 +65,7 @@ Excel worked on:
   - Deploying the front-end using Angular web app container to prevent CORS issues
   - Deploying the NoSQL database to MongoDB Atlas
 
-### **Rayyan Khan - Frontend Developer & UI/UX Designer**
+Rayyan Khan
 
 Rayyan worked on:
 - The project idea and overall application description
@@ -85,85 +83,19 @@ Rayyan worked on:
 
 ---
 
-## **Installation & Setup**
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/00ea/INFR3120-Fall25-Project
-   cd project-group-36
-   ```
+Key Files Overview
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env` file with MongoDB connection string:
-   ```
-   MONGODB_URI=your_mongodb_connection_string
-   SESSION_SECRET=your_secret_key
-   ```
-
-4. Start the application:
-   ```bash
-   npm start
-   ```
-
-5. Open your browser and navigate to `http://localhost:3000`
+- app.js - Server setup, middleware configuration, session management
+- routes/index.js - Book CRUD operations and protected routes
+- routes/auth.js - User authentication (login, register, logout)
+- views/layout.ejs - Base HTML template with header and footer
+- public/stylesheets/style.css - Modern design with gradients and responsive layout
+- PRESENTATION_SCRIPT.md - Complete presentation divided among three team members
 
 ---
 
-## **Test Credentials**
-
-- **Email**: test@email.com
-- **Password**: password123
-
----
-
-## **Project Structure**
-
-```
-project-group-36/
-├── app.js                 # Main Express application
-├── package.json          # Project dependencies
-├── bin/
-│   └── www              # Server entry point
-├── public/
-│   ├── images/          # Logo, favicon, background image
-│   └── stylesheets/
-│       └── style.css    # Main stylesheet
-├── routes/
-│   ├── index.js         # Book management routes
-│   ├── auth.js          # Authentication routes
-│   └── users.js
-├── views/
-│   ├── layout.ejs       # Master template
-│   ├── page1.ejs        # Book catalog
-│   ├── page2.ejs        # Add book form
-│   ├── page4.ejs        # Remove book page
-│   ├── login.ejs        # Login page
-│   ├── register.ejs     # Registration page
-│   ├── error.ejs        # Error page
-│   └── partials/
-│       ├── header.ejs   # Navigation bar
-│       └── footer.ejs   # Footer with social links
-└── PRESENTATION_SCRIPT.md # 15-minute presentation script
-```
-
----
-
-## **Key Files Overview**
-
-- **app.js** - Server setup, middleware configuration, session management
-- **routes/index.js** - Book CRUD operations and protected routes
-- **routes/auth.js** - User authentication (login, register, logout)
-- **views/layout.ejs** - Base HTML template with header and footer
-- **public/stylesheets/style.css** - Modern design with gradients and responsive layout
-- **PRESENTATION_SCRIPT.md** - Complete presentation divided among three team members
-
----
-
-## **Notes**
+Notes
 
 - Passwords are hashed in production (bcrypt recommended)
 - Session data expires after 24 hours
@@ -173,11 +105,11 @@ project-group-36/
 
 ---
 
-## **Deployment**
+Deployment
 
 The application has been deployed to a cloud platform with:
 - Backend hosted on a web app container
 - Frontend deployed separately to prevent CORS issues
 - Database stored on MongoDB Atlas cloud service
 
-For more information on deployment, see the deployment section in our presentation script.
+Github Repo link: https://github.com/00ea/INFR3120-Fall25-Project
